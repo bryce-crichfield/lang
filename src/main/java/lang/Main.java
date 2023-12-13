@@ -60,14 +60,12 @@ public class Main {
         DeclareSymbolsAndScopes declareSymbolsAndScopes = new DeclareSymbolsAndScopes(global, scopes);
         AnnotateSymbolsWithTypes annotateSymbolsWithTypes = new AnnotateSymbolsWithTypes(scopes);
         AnnotateExpressionsWithTypes annotateExpressionsWithTypes = new AnnotateExpressionsWithTypes(scopes, types);
-        InferVariableTypes inferVariableTypes = new InferVariableTypes(scopes, types);
         EnforceTypeUsages enforceTypeUsages = new EnforceTypeUsages(scopes, types);
 
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk(declareSymbolsAndScopes, tree);
         walker.walk(annotateSymbolsWithTypes, tree);
         walker.walk(annotateExpressionsWithTypes, tree);
-        walker.walk(inferVariableTypes, tree);
         walker.walk(enforceTypeUsages, tree);
     }
 }

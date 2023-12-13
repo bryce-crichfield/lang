@@ -18,17 +18,12 @@ public class AnnotateSymbolsWithTypes extends SlangBaseListener {
     }
 
     public void enterVariableDeclaration(SlangParser.VariableDeclarationContext ctx) {
-        if (ctx.type() != null) {
-            // The type is explicitly declared
-            Scope current = scopes.get(ctx);
-            VariableSymbol symbol = (VariableSymbol) current.resolve(ctx.ID().getText());
-            SlangParser.TypeContext typeContext = ctx.type();
-            Type type = resolve(typeContext, scopes);
-            System.out.println("Variable " + symbol.getName() + " has type " + type.getName());
-            symbol.setType(type);
-        } else {
-            // We will have to derive the type from the expression which is in the next step
-        }
+        Scope current = scopes.get(ctx);
+        VariableSymbol symbol = (VariableSymbol) current.resolve(ctx.ID().getText());
+        SlangParser.TypeContext typeContext = ctx.type();
+        Type type = resolve(typeContext, scopes);
+        System.out.println("Variable " + symbol.getName() + " has type " + type.getName());
+        symbol.setType(type);
     }
 
     public void enterVariableAssignment(SlangParser.VariableAssignmentContext ctx) {

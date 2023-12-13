@@ -60,8 +60,7 @@ variable
     |   variableAssignment '=' expression
     ;
 variableDeclaration
-    :   'var' ID ':' type
-    |   'var' ID
+    :   ID ':' type
     ;
 variableAssignment
     :   accessor
