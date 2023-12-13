@@ -156,7 +156,6 @@ public class AnnotateExpressionsWithTypes extends SlangBaseListener {
         if (ctx.NUMBER() != null) {
             Scope current = scopes.get(ctx);
             Type type = (Type) current.resolve("Number");
-            System.out.println("Operand: " + ctx.getText() + " is of type " + type.getName());
             types.put(ctx, type);
             return;
         }
@@ -164,7 +163,6 @@ public class AnnotateExpressionsWithTypes extends SlangBaseListener {
         if (ctx.STRING() != null) {
             Scope current = scopes.get(ctx);
             Type type = (Type) current.resolve("String");
-            System.out.println("Operand: " + ctx.getText() + " is of type " + type.getName());
             types.put(ctx, type);
             return;
         }
@@ -172,7 +170,6 @@ public class AnnotateExpressionsWithTypes extends SlangBaseListener {
         if (ctx.NULL() != null) {
             Scope current = scopes.get(ctx);
             Type type = (Type) current.resolve("Null");
-            System.out.println("Operand: " + ctx.getText() + " is of type " + type.getName());
             types.put(ctx, type);
             return;
         }
@@ -180,7 +177,6 @@ public class AnnotateExpressionsWithTypes extends SlangBaseListener {
         if (ctx.accessor() != null) {
             // NOTE: I think this is redundant
             TypedSymbol symbol = Resolvers.resolveAccessorToTypedSymbol(scopes, ctx.accessor());
-            System.out.println("Operand: " + ctx.getText() + " is of type " + symbol.getType().getName());
             types.put(ctx, symbol.getType());
             return;
         }
@@ -188,13 +184,11 @@ public class AnnotateExpressionsWithTypes extends SlangBaseListener {
         if (ctx.tuple() != null) {
             Scope current = scopes.get(ctx);
             String name = ctx.tuple().getText();
-            TypeTuple typle = (TypeTuple) current.resolve(name);
-            System.out.println("Operand: " + ctx.getText() + " is of type " + typle.getName());
-            types.put(ctx, typle);
+            TypeTuple tuple = (TypeTuple) current.resolve(name);
+            types.put(ctx, tuple);
             return;
         }
 
         throw new RuntimeException("Unknown operand type");
     }
-
 }

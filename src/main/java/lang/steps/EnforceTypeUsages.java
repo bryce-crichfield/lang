@@ -141,4 +141,11 @@ public class EnforceTypeUsages extends SlangBaseListener {
             }
         }
     }
+
+    /* TODO:
+            - Binary operators
+            - Unary operators
+            - Array access
+            - Postfix operators
+     */
 }

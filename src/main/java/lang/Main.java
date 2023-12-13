@@ -58,13 +58,13 @@ public class Main {
         ParseTreeProperty<Type> types = new ParseTreeProperty<>();
 
         DeclareSymbolsAndScopes declareSymbolsAndScopes = new DeclareSymbolsAndScopes(global, scopes);
-        AnnotateSymbolsWithTypes annotateSymbolsWithTypes = new AnnotateSymbolsWithTypes(scopes);
+        AttachTypeAnnotationsToSymbols attachTypeAnnotationsToSymbols = new AttachTypeAnnotationsToSymbols(scopes);
         AnnotateExpressionsWithTypes annotateExpressionsWithTypes = new AnnotateExpressionsWithTypes(scopes, types);
         EnforceTypeUsages enforceTypeUsages = new EnforceTypeUsages(scopes, types);
 
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk(declareSymbolsAndScopes, tree);
-        walker.walk(annotateSymbolsWithTypes, tree);
+        walker.walk(attachTypeAnnotationsToSymbols, tree);
         walker.walk(annotateExpressionsWithTypes, tree);
         walker.walk(enforceTypeUsages, tree);
     }
